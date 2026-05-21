@@ -47,6 +47,15 @@ Reglas:
 - Guardar al menos los últimos 10 pedidos por usuario.
 - Mostrar pedidos ordenados del más reciente al más antiguo.
 
+Leer:
+- docs/roadmap.md
+- docs/database.md
+
+Antes de hacer cambios:
+- revisar estructura existente
+- evitar duplicar componentes
+- mantener tipado TypeScript
+
 Pantallas nuevas:
 - `/login`
 - `/register`
