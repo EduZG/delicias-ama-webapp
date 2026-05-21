@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: 255 251 244;
+  --color-foreground: 23 19 15;
+  --color-muted: 118 105 93;
+  --color-border: 231 219 203;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgb(255 189 106 / 0.18), transparent 32rem),
+    rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #ffbd6a;
+  color: #17130f;
+}
