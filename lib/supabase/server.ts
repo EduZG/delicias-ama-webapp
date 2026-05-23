@@ -12,7 +12,7 @@ export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
   const { supabaseAnonKey, supabaseUrl } = getSupabaseEnv();
 
-  return createServerClient<Database>(
+  return createServerClient<Database, "public", any>(
     supabaseUrl,
     supabaseAnonKey,
     {

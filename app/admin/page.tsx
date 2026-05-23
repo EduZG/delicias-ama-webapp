@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { PageHeader } from "@/components/ui/page-header";
 import { orderStatusLabels } from "@/lib/orders/status";
+import { requireAdmin } from "@/services/auth";
 import type { OrderStatus } from "@/types/order";
 
 export const metadata = {
@@ -16,7 +17,9 @@ const lanes: OrderStatus[] = [
   "cancelado",
 ];
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  await requireAdmin();
+
   return (
     <div>
       <PageHeader

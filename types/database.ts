@@ -22,11 +22,14 @@ export type Database = {
           created_at?: string;
         };
         Update: {
+          id?: string;
           full_name?: string | null;
           phone?: string | null;
           default_address?: string | null;
           role?: UserRole;
+          created_at?: string;
         };
+        Relationships: [];
       };
       products: {
         Row: {
@@ -54,6 +57,7 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["products"]["Insert"]>;
+        Relationships: [];
       };
       orders: {
         Row: {
@@ -87,6 +91,15 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["orders"]["Insert"]>;
+        Relationships: [
+          {
+            foreignKeyName: "orders_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       order_items: {
         Row: {
@@ -110,6 +123,22 @@ export type Database = {
         Update: Partial<
           Database["public"]["Tables"]["order_items"]["Insert"]
         >;
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey";
+            columns: ["order_id"];
+            isOneToOne: false;
+            referencedRelation: "orders";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       addresses: {
         Row: {
@@ -131,7 +160,20 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["addresses"]["Insert"]>;
+        Relationships: [
+          {
+            foreignKeyName: "addresses_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 };

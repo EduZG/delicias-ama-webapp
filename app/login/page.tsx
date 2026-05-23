@@ -1,45 +1,33 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { LoginForm } from "@/components/auth/login-form";
 import { Card } from "@/components/ui/card";
 import { PageHeader } from "@/components/ui/page-header";
+import { Toast } from "@/components/ui/toast";
 
 export const metadata = {
   title: "Login",
 };
 
-export default function LoginPage() {
+type LoginPageProps = {
+  searchParams: Promise<{
+    message?: string;
+    type?: "success" | "error" | "info";
+  }>;
+};
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const { message, type } = await searchParams;
+
   return (
     <div>
+      <Toast message={message} type={type} />
       <PageHeader
         eyebrow="cuenta"
-        title="Iniciar sesión"
+        title="Iniciar sesion"
         description="Accede para consultar tus pedidos y guardar tus datos favoritos."
       />
       <section className="container max-w-xl pb-12">
-        <Card className="space-y-4">
-          <label className="space-y-2 text-sm font-medium text-ink-700">
-            Email
-            <input
-              className="h-11 w-full rounded-md border border-border bg-white px-3 outline-none focus:border-brand-500"
-              placeholder="email@dominio.com"
-              type="email"
-            />
-          </label>
-          <label className="space-y-2 text-sm font-medium text-ink-700">
-            Contraseña
-            <input
-              className="h-11 w-full rounded-md border border-border bg-white px-3 outline-none focus:border-brand-500"
-              placeholder="••••••••"
-              type="password"
-            />
-          </label>
-          <Button className="w-full">Entrar</Button>
-          <p className="text-center text-sm text-muted">
-            ¿No tienes cuenta?{" "}
-            <Link className="font-semibold text-brand-700" href="/register">
-              Crear cuenta
-            </Link>
-          </p>
+        <Card>
+          <LoginForm />
         </Card>
       </section>
     </div>

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, ShoppingBag, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getCurrentUser } from "@/services/auth";
+import { logoutAction } from "@/services/auth/actions";
 
 const navItems = [
   { href: "/", label: "Inicio" },
@@ -10,7 +12,9 @@ const navItems = [
   { href: "/admin", label: "Admin" },
 ];
 
-export function Navbar() {
+export async function Navbar() {
+  const user = await getCurrentUser();
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/86 backdrop-blur">
       <div className="container flex h-16 items-center justify-between gap-4">
@@ -40,8 +44,15 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {user ? (
+            <form action={logoutAction} className="hidden sm:block">
+              <Button type="submit" variant="ghost">
+                Salir
+              </Button>
+            </form>
+          ) : null}
           <Button asChild size="icon" variant="ghost" aria-label="Cuenta">
-            <Link href="/account">
+            <Link href={user ? "/account" : "/login"}>
               <UserRound className="h-5 w-5" />
             </Link>
           </Button>

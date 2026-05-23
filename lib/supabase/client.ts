@@ -9,5 +9,8 @@ export function createSupabaseBrowserClient() {
 
   const { supabaseAnonKey, supabaseUrl } = getSupabaseEnv();
 
-  return createBrowserClient<Database>(supabaseUrl, supabaseAnonKey);
+  return createBrowserClient<Database, "public", any>(
+    supabaseUrl,
+    supabaseAnonKey,
+  );
 }
