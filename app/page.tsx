@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ProductCard } from "@/components/catalog/product-card";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { featuredProducts } from "@/lib/data/products";
 import { formatCurrency } from "@/lib/utils/format";
+import { getFeaturedProducts } from "@/services/products";
 
 const highlights = [
   { label: "Empanadas", value: "artesanales" },
@@ -11,7 +11,9 @@ const highlights = [
   { label: "Recogida", value: "sin fricción" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredProducts = await getFeaturedProducts();
+
   return (
     <div>
       <section className="container grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:py-20">
